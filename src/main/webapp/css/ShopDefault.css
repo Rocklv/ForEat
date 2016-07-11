@@ -1,0 +1,82 @@
+﻿*{
+	font-size: 16px;
+	font-family: '微软雅黑';
+	padding: 0;
+	margin: 0;
+	word-wrap: break-word;
+}
+.container-fluid {
+	background: url('../img/bg-body.gif') repeat;
+}
+
+#Mainbody {
+	margin:30px auto;
+	width: 300px;
+	color: rgba(255,255,255,0.8);
+}
+
+#logo{
+	width: 160px;
+	height: 160px;
+	padding: 0;
+	background: url('../img/logo.jpg') no-repeat;
+	background-size: 100%;
+	margin: 0 auto;
+	display: block;
+	border-width: 0;
+	border-radius: 15em;
+	animation: 9.5s linear 0s normal none infinite rotate;
+	-webkit-animation:9.5s linear 0s normal none infinite rotate;
+}
+#logo:hover{
+	cursor: pointer;
+}
+
+@-webkit-keyframes rotate{
+
+	from{
+		-webkit-transform:rotate(0deg)
+	}
+	to{
+		-webkit-transform:rotate(360deg)
+	}
+
+}
+
+@-moz-keyframes rotate{
+
+	from{
+		-moz-transform:rotate(0deg)
+	}
+	to{
+		-moz-transform:rotate(360deg)
+	}
+
+}
+
+@-ms-keyframes rotate{
+
+	from{
+		-ms-transform:rotate(0deg)
+	}
+	to{
+		-ms-transform:rotate(360deg)
+	}
+
+}
+
+@-o-keyframes rotate{
+
+	from{
+		-o-transform:rotate(0deg)
+	}
+	to{
+		-o-transform:rotate(360deg)
+	}
+}
+
+#Content {
+	width: 100%;
+	margin:30px auto 70px;
+	color: #777;
+}
