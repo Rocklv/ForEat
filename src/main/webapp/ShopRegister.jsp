@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			$.ajax({
 				type: "post",
-				url: baseUrl+"index.jsp?control=Shop&method=ShopRegister",
+				url: baseUrl+"index.jsp?control=Shop&method=shopRegister",
 				dataType: 'json',
 				data:{
 					'clientJson': JSON.stringify(clientJson)

@@ -9,8 +9,7 @@
 	if (phone != null && !"".equals(phone)) {
 		//将用户的手机号放入session供其它页面获取
 		session.setAttribute("userPhone", phone);
-	}else {
-		//直接从session中获取用户手机号
+	}else{
 		phone = (String) session.getAttribute("userPhone");
 	}
 %>
@@ -64,7 +63,7 @@
 			clientJson.userPhone = userPhone;
 			$.ajax({
 				type:"post",
-				url:baseUrl+"index.jsp?control=User&method=UserCenter",
+				url:baseUrl+"index.jsp?control=User&method=userCenter",
 				dataType:'json',
 				data:{
 					'clientJson': JSON.stringify(clientJson)

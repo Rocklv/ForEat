@@ -39,22 +39,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 	var baseUrl = document.getElementById('basePath').href;
-	//alert(baseUrl);
+
 	document.getElementById("submit").onclick = function () {
 		var clientJson = new Object();
 		clientJson.phone = document.getElementById("phone").value;
 		clientJson.password = document.getElementById("password").value;
-//			alert(JSON.stringify(clientJson));
+
 		$.ajax({
 			type:"post",
-			url:baseUrl+"index.jsp?control=Shop&method=ShopLogin",
+			url:baseUrl+"index.jsp?control=Shop&method=shopLogin",
 			dataType:'json',
 			data:{
 				'clientJson':JSON.stringify(clientJson)
 			},
 			success: function (data) {
 				//登陆成功则跳转至商家信息界面
-				setTimeout(location.href="ShopCenter.jsp?phone="+clientJson.phone,2000);
+				setTimeout(location.href="ShopCenter.jsp?phone="+clientJson.phone,1000);
 			},
 			error: function (xhr,status,errMsg) {
 				alert(status+" 登陆失败！");

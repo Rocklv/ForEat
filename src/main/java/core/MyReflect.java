@@ -8,9 +8,18 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * 工具类：反射路由
+ */
 public class MyReflect {
 
-	public static void ReflectControl(String controller, String method, JSONObject clientJson, HttpServletResponse response) {
+	/**控制器反射
+	 * @param controller
+	 * @param method
+	 * @param clientJson
+	 * @param response
+     */
+	public static void reflectControl(String controller, String method, JSONObject clientJson, HttpServletResponse response) {
 
 		JSONObject serverJson = null;
 		if (!"".equals(controller) && !"".equals(method)) {

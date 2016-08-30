@@ -41,6 +41,10 @@
 	height: 50%;
 }
 
+.list-part:first-of-type{
+    height: 30%;
+}
+
 .list-part p {
 	font-size: 12px;
 	margin-bottom: 0px;
@@ -58,6 +62,7 @@
 	height: 45px;
 	float: left;
 	margin: 0 0 0 10px;
+	overflow: hidden;
 }
 
 .orderId {
@@ -66,6 +71,7 @@
 	margin: 0 0 0 10px;
 	font-size: 0.8em;
 	float: left;
+    overflow: hidden;
 }
 
 .time {
@@ -82,7 +88,7 @@
 	height: 30px;
 	float: right;
 	color: #fff;
-	margin: 10px 0 0 0;
+	margin: 15px 0 0 0;
 	bottom: 0;
 	font-size: 0.7em;
 	border-radius: 0.3em;

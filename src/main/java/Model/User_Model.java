@@ -8,12 +8,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * model: User_Model
+ */
 public class User_Model {
 
     public User_Model(){
         System.out.println("User_Model");
     }
 
+    /**用户登录
+     * method: isLogin()
+     * @param phone
+     * @param password
+     * @return
+     */
     public static boolean isLogin(String phone,String password){
         boolean output = false;
         String sql = "select name from user where id=? and password=?";
@@ -41,7 +50,12 @@ public class User_Model {
         return output;
     }
 
-    public static JSONObject UserSelect(String phone){
+    /**用户详情查询
+     * method: userSelect()
+     * @param phone
+     * @return
+     */
+    public static JSONObject userSelect(String phone){
         JSONObject sJson = new JSONObject();
         String sql = "select id,name,address from user where id=?";
         Connection conn = DBUtil.getConnection();
@@ -70,7 +84,15 @@ public class User_Model {
         return sJson;
     }
 
-    public static boolean UserRegister(String phone,String password,String name,String address){
+    /**用户注册
+     * method: userRegister()
+     * @param phone
+     * @param password
+     * @param name
+     * @param address
+     * @return
+     */
+    public static boolean userRegister(String phone,String password,String name,String address){
 
         String sql ="insert into user(`id`,`password`,`name`,`address`) values(?,?,?,?)";
         Connection conn = DBUtil.getConnection();
@@ -84,7 +106,9 @@ public class User_Model {
             pst.setString(2,password);
             pst.setString(3,name);
             pst.setString(4,address);
-            rs = pst.execute();
+
+            if (pst.executeUpdate() > 0) rs = true;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

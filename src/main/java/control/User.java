@@ -1,10 +1,11 @@
 package control;
 
-
 import Model.User_Model;
 import net.sf.json.JSONObject;
 
-import javax.servlet.http.*;
+/**
+ * control: User
+ */
 
 public class User {
 
@@ -18,34 +19,34 @@ public class User {
 	 * @param cJson 客户端发送的数据
 	 * @return sJson 服务端响应的数据
      */
-	public JSONObject UserLogin(JSONObject cJson) {
+	public JSONObject userLogin(JSONObject cJson) {
 		JSONObject sJson = new JSONObject();
 
 		String phone = cJson.getString("phone");
 		String password = cJson.getString("password");
 
 		//用户登录验证
-		boolean isLogin = User_Model.isLogin(phone,password);
+		boolean userIsLogin = User_Model.isLogin(phone,password);
 
-		if(isLogin){
+		if(userIsLogin){
 			sJson.element(resultCode, 0);
-			sJson.element(resultMessage, "登陆成功");
+			sJson.element(resultMessage, "用户登陆成功");
 		}else {
 			sJson.element(resultCode, 1);
-			sJson.element(resultMessage, "登陆失败");
+			sJson.element(resultMessage, "用户登陆失败");
 		}
 		return sJson;
 	}
 
 	/**
-	 * method: UserCenter
+	 * method: userCenter
 	 */
-	public JSONObject UserCenter(JSONObject cJson){
+	public JSONObject userCenter(JSONObject cJson){
 		JSONObject sJson;
 
 		String phone = cJson.getString("userPhone");
 
-		sJson = User_Model.UserSelect(phone);
+		sJson = User_Model.userSelect(phone);
 
 		System.out.println(sJson.getString("userPhone")+
 							sJson.getString("userName")+
@@ -54,9 +55,9 @@ public class User {
 	}
 
 	/**
-	 * method: UserRegister
+	 * method: userRegister
 	 */
-	public JSONObject UserRegister(JSONObject cJson){
+	public JSONObject userRegister(JSONObject cJson){
 		JSONObject sJson = new JSONObject();
 
 		String userPhone = cJson.getString("userPhone");
@@ -64,14 +65,14 @@ public class User {
 		String userName = cJson.getString("userName");
 		String userAddress = cJson.getString("userAddress");
 
-		boolean isReg = User_Model.UserRegister(userPhone,userPassword,userName,userAddress);
+		boolean userIsReg = User_Model.userRegister(userPhone,userPassword,userName,userAddress);
 
-		if (isReg){
+		if (userIsReg){
 			sJson.element(resultCode,0);
-			sJson.element(resultMessage,"注册成功！");
+			sJson.element(resultMessage,"用户注册成功！");
 		}else {
 			sJson.element(resultCode,1);
-			sJson.element(resultMessage,"注册失败！");
+			sJson.element(resultMessage,"用户注册失败！");
 		}
 
 		return sJson;

@@ -4,7 +4,7 @@ import Model.Shop_Model;
 import net.sf.json.JSONObject;
 
 /**
- * Created by Rocklv on 2016/7/7.
+ * control: Shop
  */
 public class Shop {
 
@@ -14,38 +14,38 @@ public class Shop {
     }
 
     /**
-     * method: ShopLogin
+     * method: shopLogin
      * @param cJson 客户端发送的数据
      * @return sJson 服务端响应的数据
      */
-    public JSONObject ShopLogin(JSONObject cJson) {
+    public JSONObject shopLogin(JSONObject cJson) {
         JSONObject sJson = new JSONObject();
 
         String phone = cJson.getString("phone");
         String password = cJson.getString("password");
 
-        //用户登录验证
-        boolean isLogin = Shop_Model.isLogin(phone,password);
+        //商家登录验证
+        boolean shopIsLogin = Shop_Model.isLogin(phone,password);
 
-        if(isLogin){
+        if(shopIsLogin){
             sJson.element(resultCode, 0);
-            sJson.element(resultMessage, "登陆成功");
+            sJson.element(resultMessage, "商家登陆成功");
         }else {
             sJson.element(resultCode, 1);
-            sJson.element(resultMessage, "登陆失败");
+            sJson.element(resultMessage, "商家登陆失败");
         }
         return sJson;
     }
 
     /**
-     * method: ShopCenter
+     * method: shopCenter
      */
-    public JSONObject ShopCenter(JSONObject cJson){
+    public JSONObject shopCenter(JSONObject cJson){
         JSONObject sJson;
 
         String phone = cJson.getString("shopPhone");
 
-        sJson = Shop_Model.ShopSelect(phone);
+        sJson = Shop_Model.shopSelect(phone);
 
         System.out.println(sJson.getString("shopPhone")+
                 sJson.getString("shopName")+
@@ -54,33 +54,33 @@ public class Shop {
     }
 
     /**
-     * method: ShopRegister
+     * method: shopRegister
      */
-    public JSONObject ShopRegister(JSONObject cJson){
+    public JSONObject shopRegister(JSONObject cJson){
         JSONObject sJson = new JSONObject();
 
         String shopPhone = cJson.getString("shopPhone");
         String shopName = cJson.getString("shopName");
         String shopPassword = cJson.getString("shopPassword");
 
-        boolean isReg = Shop_Model.ShopRegister(shopPhone,shopPassword,shopName);
+        boolean shopIsReg = Shop_Model.shopRegister(shopPhone,shopPassword,shopName);
 
-        if (isReg){
+        if (shopIsReg){
             sJson.element(resultCode,0);
-            sJson.element(resultMessage,"注册成功！");
+            sJson.element(resultMessage,"商家注册成功！");
         }else {
             sJson.element(resultCode,1);
-            sJson.element(resultMessage,"注册失败！");
+            sJson.element(resultMessage,"商家注册失败！");
         }
 
         return sJson;
     }
 
     /**
-     * method: ShopList
+     * method: shopList
      */
-    public JSONObject ShopList(JSONObject cJson){
+    public JSONObject shopList(JSONObject cJson){
 
-        return Shop_Model.ShopList();
+        return Shop_Model.shopList();
     }
 }

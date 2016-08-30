@@ -43,6 +43,11 @@
 	color: #8A0019;
 }
 
+#Content {
+	width: 100%;
+	margin:0 auto 70px;
+}
+
 #centerlogo {
 	width: 100%;
 	max-height: 300px;

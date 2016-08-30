@@ -68,7 +68,7 @@
 			clientJson.shopPhone = shopPhone;
 			$.ajax({
 				type:"post",
-				url:baseUrl+"index.jsp?control=Shop&method=ShopCenter",
+				url:baseUrl+"index.jsp?control=Shop&method=shopCenter",
 				dataType:'json',
 				data:{
 					'clientJson': JSON.stringify(clientJson)

@@ -4,18 +4,26 @@ import Model.Food_Model;
 import net.sf.json.JSONObject;
 
 /**
- * Created by Rocklv on 2016/7/8.
+ * control: Food
  */
 public class Food {
     /**
-     * method: UserFoodList
+     * method: userFoodList
      */
-    public JSONObject UserFoodList(JSONObject cJson){
-        JSONObject sJson;
+    public JSONObject userFoodList(JSONObject cJson){
+
         String shopPhone = cJson.getString("shopPhone");
+        return Food_Model.userFoodList(shopPhone);
+    }
 
-        sJson = Food_Model.UserFoodList(shopPhone);
+    /**
+     * method: foodDetail
+     * @param cJson
+     * @return
+     */
+    public JSONObject foodDetail(JSONObject cJson){
 
-        return sJson;
+        String foodId = cJson.getString("foodId");
+        return Food_Model.foodDetail(foodId);
     }
 }

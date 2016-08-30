@@ -44,10 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var clientJson = new Object();
 		clientJson.phone = document.getElementById("phone").value;
 		clientJson.password = document.getElementById("password").value;
-	//	alert(JSON.stringify(clientJson));
+	//alert(JSON.stringify(clientJson));
 		$.ajax({
 			type:"post",
-			url:baseUrl+"index.jsp?control=User&method=UserLogin",
+			url:baseUrl+"index.jsp?control=User&method=userLogin",
 			dataType:'json',
 			data:{
 				'clientJson':JSON.stringify(clientJson)

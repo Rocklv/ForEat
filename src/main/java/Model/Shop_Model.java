@@ -9,12 +9,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * model: Shop_Model
+ */
 public class Shop_Model {
 
     public Shop_Model() {
-        System.out.println("Shop_Model");
+        System.out.println("shop_Model");
     }
 
+    /**商家登陆
+     * method: isLogin()
+     * @param phone
+     * @param password
+     * @return
+     */
     public static boolean isLogin(String phone, String password) {
         boolean output = false;
         String sql = "select name from shop where id=? and password=?";
@@ -42,7 +51,12 @@ public class Shop_Model {
         return output;
     }
 
-    public static JSONObject ShopSelect(String phone) {
+    /**查询商家详情(根据商家的电话号)
+     * method: shopSelect()
+     * @param phone
+     * @return
+     */
+    public static JSONObject shopSelect(String phone) {
         JSONObject sJson = new JSONObject();
         String sql = "select id,state,name,detail from shop where id=?";
         Connection conn = DBUtil.getConnection();
@@ -72,7 +86,14 @@ public class Shop_Model {
         return sJson;
     }
 
-    public static boolean ShopRegister(String phone, String password, String name) {
+    /**商家注册
+     * method: shopRegister
+     * @param phone
+     * @param password
+     * @param name
+     * @return
+     */
+    public static boolean shopRegister(String phone, String password, String name) {
         String sql = "insert into shop(`id`,`password`,`name`) values(?,?,?)";
         Connection conn = DBUtil.getConnection();
         PreparedStatement pst = null;
@@ -95,7 +116,12 @@ public class Shop_Model {
         return rs;
     }
 
-    public static JSONObject ShopList() {
+
+    /**商家列表
+     * method:shopList()
+     * @return sJson
+     */
+    public static JSONObject shopList() {
         JSONObject sJson = new JSONObject();
         JSONArray rsJson = new JSONArray();
         JSONObject dataJson = new JSONObject();

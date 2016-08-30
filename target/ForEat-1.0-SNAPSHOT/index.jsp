@@ -16,8 +16,7 @@
 
     //判断控制器类和对应方法 传入前端的入参和response对象
 	if (controller != null && method != null) {
-		MyReflect.ReflectControl(controller, method, json, response);
+		MyReflect.reflectControl(controller, method, json, response);
 	}
-
 
 %>
