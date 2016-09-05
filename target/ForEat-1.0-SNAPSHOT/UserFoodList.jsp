@@ -71,28 +71,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					for (var i=0; i< data.length; i++){
 						var list = "<div class='list'>"+
 										"<img src='img/food.jpg' alt='商家logo' />"+
-											"<div class='list-wrap'>"+
-												"<div class='list-part' onclick='FoodDetail(\""+data[i].foodId+"\")'>"+
-													"<p class='name'>"+data[i].foodName+"</p>"+
-													"<p class='time'>"+data[i].foodPrice+"</p>"+
-												"</div>"+
-												"<div class='list-part'>"+
-													"<p class='orderId'>"+data[i].foodDetail+"</p>"+
-													"<button onclick='OrderAdd(\""+data[i].foodId+"\",\""+data[i].shopId+"\",\""+userPhone+"\")' class='btn-confirm'>确认下单</button>"+
-												"</div>"+
+										"<div class='list-wrap'>"+
+											"<div class='list-part' onclick='foodDetail(\""+data[i].foodId+"\")'>"+
+												"<p class='name'>"+data[i].foodName+"</p>"+
+												"<p class='time'>"+data[i].foodPrice+"</p>"+
 											"</div>"+
-										"</div>";
+											"<div class='list-part'>"+
+												"<p class='orderId'>"+data[i].foodDetail+"</p>"+
+												"<button onclick='orderAdd(\""+data[i].foodId+"\",\""+data[i].shopId+"\",\""+userPhone+"\")' class='btn-confirm'>确认下单</button>"+
+											"</div>"+
+										"</div>"+
+									"</div>";
 						$("#list").append(list);
 					}
 				}
 			});
 		});
 
-		function FoodDetail(foodId) {
+		function foodDetail(foodId) {
 			setTimeout(location.href="UserFoodDetail.jsp?foodId="+foodId,1000);
 		}
 
-        function OrderAdd(food_id,shop_id,user_id) {
+        function orderAdd(food_id,shop_id,user_id) {
 			var baseUrl = "<%=basePath%>";
             var clientJson = new Object();
             clientJson.foodId = food_id;

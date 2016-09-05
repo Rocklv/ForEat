@@ -1,6 +1,7 @@
 package Model;
 
 import core.DBUtil;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import java.sql.Connection;
@@ -8,11 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
+/**订单
  * model: Order_Model
  */
 public class Order_Model {
 
+    /**下单
+     * method：orderAdd
+     * @param id
+     * @param userId
+     * @param shopId
+     * @param foodId
+     * @param createTime
+     * @return
+     */
     public static JSONObject orderAdd(String id,String userId,String shopId,String foodId,String createTime){
 
         JSONObject sJson = new JSONObject();
@@ -38,6 +48,137 @@ public class Order_Model {
             e.printStackTrace();
         }finally {
             DBUtil.close(res);
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    /**订单列表
+     * orderList
+     * @param userId
+     * @return
+     */
+    public static JSONObject orderList(String userId){
+        //初始化json数据结构
+        JSONObject sJson = new JSONObject();
+        JSONArray arrJson = new JSONArray();
+        JSONObject dataJson = new JSONObject();
+
+        //sql算法
+        String sql = "SELECT orders.id, food.name, createTime, state " +
+                                                "FROM orders,food " +
+                                                "WHERE orders.food_id=food.id " +
+                                                "and user_id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        ResultSet res = null;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,userId);
+            res = pst.executeQuery();
+            while (res.next()){
+                dataJson.element("orderId",res.getString("id"));
+                dataJson.element("foodName",res.getString("name"));
+                dataJson.element("createTime",res.getString("createTime"));
+                dataJson.element("state",res.getString("state"));
+                arrJson.add(dataJson);
+            }
+            sJson.element("serverJson",arrJson);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(res);
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    /**订单详情
+     * method: orderDetail
+     * @return
+     */
+    public static JSONObject orderDetail(String orderState){
+        JSONObject sJson = new JSONObject();
+        String sql = "SELECT orders.state,orders.id,orders.createTime,food.name,orders.shop_id,orders.user_id,food.detail " +
+                        "FROM orders,food WHERE orders.food_id=food.id and orders.id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        ResultSet res = null;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,orderState);
+            res = pst.executeQuery();
+
+            while (res.next()){
+                sJson.element("orderState",res.getString("orders.state"));
+                sJson.element("orderId",res.getString("orders.id"));
+                sJson.element("createTime",res.getString("orders.createTime"));
+                sJson.element("foodName",res.getString("food.name"));
+                sJson.element("shopPhone",res.getString("orders.shop_id"));
+                sJson.element("userPhone",res.getString("orders.user_id"));
+                sJson.element("foodDetail",res.getString("food.detail"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(res);
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    public static JSONObject orderConfirm(String orderId){
+        JSONObject sJson = new JSONObject();
+        String sql = "UPDATE orders SET state='2' WHERE id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        int res;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,orderId);
+            res = pst.executeUpdate();
+            if (res==1)
+                sJson.element("message","已确认收获！");
+            else
+                sJson.element("message","请重新操作！");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    /**订单删除
+     *method: orderDelete()
+     * @param orderId
+     * @return
+     */
+    public static JSONObject orderDelete(String orderId){
+        JSONObject sJson = new JSONObject();
+        String sql = "delete from orders where id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        int res;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,orderId);
+            res = pst.executeUpdate();
+            if (res==1)
+                sJson.element("message","订单删除成功！");
+            else
+                sJson.element("message","操作失败！");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
             DBUtil.close(pst);
             DBUtil.close(con);
         }

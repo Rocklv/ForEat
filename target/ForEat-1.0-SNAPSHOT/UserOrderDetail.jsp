@@ -3,6 +3,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String orderId = request.getParameter("orderId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -18,42 +19,87 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body class="container-fluid">
 	<div id="nav">
-		<a href=""><i class="icon-food"></i></a>
-		<a href=""><i class="icon-list-alt selected"></i></a>
-		<a href=""><i class="icon-user"></i></a>
+		<a href="ShopList.jsp"><i class="icon-food"></i></a>
+		<a href="UserOrderList.jsp"><i class="icon-list-alt selected"></i></a>
+		<a href="UserCenter.jsp"><i class="icon-user"></i></a>
 	</div>
 	<div id="Content">
 		<img id="centerlogo" src="img/food.jpg" alt="">
 		<div id="center-wrap">
 			<div class="information">
 				<p class="itom">订单状态：</p>
-				<p class="data">orderState</p>
+				<p id="orderState" class="data">orderState</p>
 			</div>
 			<div class="information">
 				<p class="itom">订单号码：</p>
-				<p class="data">orderId</p>
+				<p id="orderId" class="data">orderId</p>
 			</div>
 			<div class="information">
 				<p class="itom">创建时间：</p>
-				<p class="data">creatTime</p>
+				<p id="createTime" class="data">createTime</p>
 			</div>
 			<div class="information">
 				<p class="itom">餐品名称：</p>
-				<p class="data">foodName</p>
+				<p id="foodName" class="data">foodName</p>
 			</div>
 			<div class="information">
 				<p class="itom">商家电话：</p>
-				<p class="data">shopPhone</p>
+				<p id="shopPhone" class="data">shopPhone</p>
 			</div>
+            <div class="information">
+                <p class="itom">用户电话：</p>
+                <p id="userPhone" class="data">userPhone</p>
+            </div>
 			<div class="information">
 				<p class="itom">餐品详情：</p>
-				<textarea class="detail">foodDetail</textarea>
+				<textarea id="foodDetail" class="detail">foodDetail</textarea>
 			</div>
 		</div>
 		
 	</div>
-	
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 	<script type="text/javascript">
+		$(function () {
+            var baseUrl = '<%=basePath%>';
+            var clientJson = new Object();
+            clientJson.orderId = '<%=orderId%>';
+
+            $.ajax({
+                type: 'post',
+                url: baseUrl+'index.jsp?control=Orders&method=orderDetail',
+                dataType: 'json',
+                data:{
+                    clientJson: JSON.stringify(clientJson)
+                },
+                success: function (sJson) {
+
+                    $("#orderState").html(showState(sJson.orderState));
+                    $("#orderId").html(sJson.orderId);
+                    $("#createTime").html(sJson.createTime);
+                    $("#foodName").html(sJson.foodName);
+                    $("#shopPhone").html(sJson.shopPhone);
+                    $("#userPhone").html(sJson.userPhone);
+                    $("#foodDetail").html(sJson.foodDetail);
+                }
+            });
+        });
+
+        //订单状态显示
+        function showState(orderState) {
+            switch (orderState){
+                case '0':
+                    return "等待商家接单。。。";
+                    break;
+                case '1':
+                    return "商家已接单！";
+                    break;
+                case '2':
+                    return "订单完成！";
+                    break;
+                default:
+                    break;
+            }
+        }
 	</script>
 </body>
 </html>

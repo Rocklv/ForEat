@@ -83,7 +83,7 @@
 	text-align: center;
 }
 
-.btn-confirm {
+.btn-confirm,.btn-info,.btn-danger {
 	width: 30%;
 	height: 30px;
 	float: right;
@@ -93,7 +93,10 @@
 	font-size: 0.7em;
 	border-radius: 0.3em;
 	border: none;
-	background: #5CB85C;
+}
+
+.btn-confirm{
+    background: #5CB85C;
 }
 
 #nav {
