@@ -4,9 +4,9 @@
 	padding: 0;
 }
 
-#list:hover {
-	background: #aaa;
-}
+/*#list:hover {*/
+	/*background: #aaa;*/
+/*}*/
 
 .list {
 	width: 90%;
@@ -78,7 +78,7 @@
 	text-align: center;
 }
 
-.btn-confirm {
+.btn-confirm,.btn-info {
 	width: 30%;
 	height: 30px;
 	float: right;
@@ -88,6 +88,9 @@
 	font-size: 0.7em;
 	border-radius: 0.3em;
 	border: none;
+}
+
+.btn-confirm{
 	background: #5CB85C;
 }
 

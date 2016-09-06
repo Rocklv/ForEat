@@ -3,16 +3,15 @@ package control;
 import Model.Order_Model;
 import net.sf.json.JSONObject;
 
-import javax.print.attribute.standard.JobSheets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
+/**控制器：订单
  * control: Orders
  */
 public class Orders {
 
-    /**下单
+    /**用户下单
      * method: orderAdd()
      * @param cJson
      * @return
@@ -32,15 +31,37 @@ public class Orders {
         return Order_Model.orderAdd(id,userId,shopId,foodId,createTime);
     }
 
-    /**订单列表
-     * method: orderList()
+    /**用户查看订单列表
+     * method: userOrderList()
      * @param cJson
      * @return
      */
-    public JSONObject orderList(JSONObject cJson){
+    public JSONObject userOrderList(JSONObject cJson){
 
         String userId = (String) cJson.get("userPhone");
-        return Order_Model.orderList(userId);
+        //sql算法
+        String sql = "SELECT orders.id, food.name, createTime, state " +
+                        "FROM orders,food " +
+                        "WHERE orders.food_id=food.id " +
+                        "and user_id=?";
+        return Order_Model.orderList(userId,sql);
+    }
+
+    /**商家查看订单列表
+     * method: shopOrderList()
+     * @param cJson
+     * @return
+     */
+    public JSONObject shopOrderList(JSONObject cJson){
+
+        String shopId = (String) cJson.get("shopPhone");
+        //sql算法
+        String sql = "SELECT orders.id, food.name, createTime, state " +
+                    "FROM orders,food " +
+                    "WHERE orders.food_id=food.id " +
+                    "and orders.state in('0','1') " +
+                    "and orders.shop_id=?";
+        return Order_Model.orderList(shopId,sql);
     }
 
     /**订单详情
@@ -52,6 +73,17 @@ public class Orders {
 
         String orderId = (String) cJson.get("orderId");
         return Order_Model.orderDetail(orderId);
+    }
+
+    /**商家接单
+     * method: orderReceive()
+     * @param cJson
+     * @return
+     */
+    public JSONObject orderReceive(JSONObject cJson){
+
+        String orderId = (String) cJson.get("orderId");
+        return Order_Model.orderReceive(orderId);
     }
 
     /**确认收货

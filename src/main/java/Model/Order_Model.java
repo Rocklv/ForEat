@@ -9,12 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**订单
+/**数据处理：订单
  * model: Order_Model
  */
 public class Order_Model {
 
-    /**下单
+    /**用户下单
      * method：orderAdd
      * @param id
      * @param userId
@@ -54,29 +54,20 @@ public class Order_Model {
         return sJson;
     }
 
-    /**订单列表
-     * orderList
-     * @param userId
-     * @return
-     */
-    public static JSONObject orderList(String userId){
+
+    public static JSONObject orderList(String roleId,String sql){
         //初始化json数据结构
         JSONObject sJson = new JSONObject();
         JSONArray arrJson = new JSONArray();
         JSONObject dataJson = new JSONObject();
 
-        //sql算法
-        String sql = "SELECT orders.id, food.name, createTime, state " +
-                                                "FROM orders,food " +
-                                                "WHERE orders.food_id=food.id " +
-                                                "and user_id=?";
         Connection con = DBUtil.getConnection();
         PreparedStatement pst = null;
         ResultSet res = null;
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1,userId);
+            pst.setString(1,roleId);
             res = pst.executeQuery();
             while (res.next()){
                 dataJson.element("orderId",res.getString("id"));
@@ -100,7 +91,7 @@ public class Order_Model {
      * method: orderDetail
      * @return
      */
-    public static JSONObject orderDetail(String orderState){
+    public static JSONObject orderDetail(String orderId){
         JSONObject sJson = new JSONObject();
         String sql = "SELECT orders.state,orders.id,orders.createTime,food.name,orders.shop_id,orders.user_id,food.detail " +
                         "FROM orders,food WHERE orders.food_id=food.id and orders.id=?";
@@ -110,7 +101,7 @@ public class Order_Model {
 
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1,orderState);
+            pst.setString(1,orderId);
             res = pst.executeQuery();
 
             while (res.next()){
@@ -132,6 +123,11 @@ public class Order_Model {
         return sJson;
     }
 
+    /**确认收货
+     * method: orderConfirm
+     * @param orderId
+     * @return
+     */
     public static JSONObject orderConfirm(String orderId){
         JSONObject sJson = new JSONObject();
         String sql = "UPDATE orders SET state='2' WHERE id=?";
@@ -176,6 +172,30 @@ public class Order_Model {
                 sJson.element("message","订单删除成功！");
             else
                 sJson.element("message","操作失败！");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    public static JSONObject orderReceive(String orderId){
+        JSONObject sJson = new JSONObject();
+        String sql = "UPDATE orders SET state='1' WHERE id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        int res;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,orderId);
+            res = pst.executeUpdate();
+            if (res==1)
+                sJson.element("message","接单成功！");
+            else
+                sJson.element("message","接单失败！请重新操作");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
