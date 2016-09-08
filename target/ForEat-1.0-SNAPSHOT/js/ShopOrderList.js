@@ -29,8 +29,8 @@ $(function () {
 });
 
 //根据订单“状态”呈现不同的业务服务
-//0 
-//1 表示商家已接单
+//0 表示用户已下单
+//1 商家制作中
 function getOrderState(data) {
     switch (data.state){
         case '0':

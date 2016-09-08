@@ -22,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body class="container-fluid">
 	<div id="nav">
-		<a href=""><i class="icon-food"></i></a>
-		<a href=""><i class="icon-list-alt"></i></a>
-		<a href=""><i class="icon-home selected"></i></a>
+		<a href="ShopFoodList.jsp"><i class="icon-food selected"></i></a>
+		<a href="ShopOrderList.jsp"><i class="icon-list-alt"></i></a>
+		<a href="ShopCenter.jsp"><i class="icon-home"></i></a>
 	</div>
 	<div id="Content">
 		<img id="centerlogo" src="img/Starbucks.jpg" alt="">

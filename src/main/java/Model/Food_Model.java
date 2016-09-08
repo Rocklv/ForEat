@@ -3,7 +3,9 @@ package Model;
 import core.DBUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.groovy.JsonGroovyBuilder;
 
+import java.rmi.dgc.DGC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ public class Food_Model {
      * @param shopPhone
      * @return
      */
-    public static JSONObject userFoodList(String shopPhone){
+    public static JSONObject foodList(String shopPhone){
         JSONObject sJson = new JSONObject();
         JSONArray arrJson = new JSONArray();
         JSONObject dataJson = new JSONObject();
@@ -39,6 +41,7 @@ public class Food_Model {
                 dataJson.element("foodDetail",rs.getString("food.detail"));
                 dataJson.element("foodPrice",rs.getString("food.price"));
                 dataJson.element("shopName",rs.getString("shop.name"));
+                dataJson.element("foodLogo",rs.getString("food.pic"));
                 arrJson.add(dataJson);
             }
             sJson.element("serverJson", arrJson);
@@ -53,8 +56,10 @@ public class Food_Model {
         return sJson;
     }
 
-    /**用户查询餐品详情
-     * method：FoodDetail()
+    /**餐品详情
+     * method: foodDetail()
+     * @param foodId
+     * @return
      */
     public static JSONObject foodDetail(String foodId){
         JSONObject sJson = new JSONObject();
@@ -86,6 +91,35 @@ public class Food_Model {
             DBUtil.close(conn);
         }
 
+        return sJson;
+    }
+
+    /**删除餐品
+     * method: foodDelete()
+     * @param foodId
+     * @return
+     */
+    public static JSONObject foodDelete(String foodId){
+        JSONObject sJson = new JSONObject();
+        String sql = "delete from food where id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        int res;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,foodId);
+            res = pst.executeUpdate();
+            if (res != 1)
+                sJson.element("message","删除成功！");
+            else
+                sJson.element("message","删除失败，请重新操作！");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
         return sJson;
     }
 }

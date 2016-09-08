@@ -151,4 +151,34 @@ public class Shop_Model {
         }
         return sJson;
     }
+
+    /**查询商店名称和logo(根据商家手机号)
+     * method: findNameLogoById()
+     * @param shopId
+     * @return
+     */
+    public static JSONObject findNameLogoById(String shopId){
+        JSONObject sJson = new JSONObject();
+        String sql = "select logo,name from shop where id=?";
+        Connection con = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        ResultSet res = null;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1,shopId);
+            res = pst.executeQuery();
+            while (res.next()){
+                sJson.element("shopLogo",res.getString("logo"));
+                sJson.element("shopName",res.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(res);
+            DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
 }

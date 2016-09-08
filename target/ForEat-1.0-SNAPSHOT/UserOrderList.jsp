@@ -49,6 +49,7 @@ String userPhone = (String) session.getAttribute("userPhone");
         var clientJson = new Object();
         clientJson.userPhone = '<%=userPhone%>';
 	</script>
+    <%--业务处理--%>
     <script type="text/javascript" src="js/UserOrderList.js"></script>
 </body>
 </html>

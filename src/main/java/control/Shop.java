@@ -47,9 +47,6 @@ public class Shop {
 
         sJson = Shop_Model.shopSelect(phone);
 
-        System.out.println(sJson.getString("shopPhone")+
-                sJson.getString("shopName")+
-                sJson.getString("shopState"));
         return sJson;
     }
 
@@ -82,5 +79,11 @@ public class Shop {
     public JSONObject shopList(JSONObject cJson){
 
         return Shop_Model.shopList();
+    }
+
+    public JSONObject findNameLogoById(JSONObject cJson){
+
+        String shopId = cJson.getString("shopPhone");
+        return Shop_Model.findNameLogoById(shopId);
     }
 }

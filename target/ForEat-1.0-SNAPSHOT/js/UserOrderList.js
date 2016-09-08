@@ -1,5 +1,4 @@
 $(function () {
-    
     $.ajax({
         type: 'post',
         url: baseUrl+'index.jsp?control=Orders&method=userOrderList',
@@ -27,7 +26,6 @@ $(function () {
             }
         }
     });
-
 });
 
 //根据订单“状态”呈现不同的业务服务

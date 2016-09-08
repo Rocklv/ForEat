@@ -52,12 +52,13 @@
 				<p class="itom">店家详情：</p>
 				<textarea id="textarea"></textarea>
 			</div>
-			<button id="foodAdd">添加餐品</button>
+			<button onclick="location.href='ShopFoodAdd.jsp'" id="foodAdd">添加餐品</button>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript">
-        var shopPhone = '<%=phone%>';
+		var baseUrl = document.getElementById('basePath').href;
+		var shopPhone = '<%=phone%>';
     </script>
 	<script type="text/javascript" src="js/ShopCenter.js"></script>
 </body>

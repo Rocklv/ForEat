@@ -52,12 +52,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			data:{
 				'clientJson':JSON.stringify(clientJson)
 			},
-			success: function (data) {
-				//登陆成功则跳转至商家信息界面
-				setTimeout(location.href="ShopCenter.jsp?phone="+clientJson.phone,1000);
-			},
-			error: function (xhr,status,errMsg) {
-				alert(status+" 登陆失败！");
+			success: function (sJson) {
+				if (sJson.resultCode != 0){
+					//登陆失败则重新访问登陆界面
+					alert(sJson.resultMessage);
+					location.href="ShopLogin.jsp";
+				}else {
+					//登陆成功则跳转至个人信息界面
+					alert(sJson.resultMessage);
+					location.href="ShopCenter.jsp?phone="+clientJson.phone;
+				}
 			}
 		});
 	}

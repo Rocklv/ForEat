@@ -1,8 +1,10 @@
-var baseUrl = document.getElementById('basePath').href;
-
 //页面加载完成之后加载个人信息数据
 $(document).ready(function () {
 
+    if (shopPhone == "null"){
+        alert("登陆失败请重新登陆！");
+        location.href="ShopLogin.jsp";
+    }
     var clientJson = new Object();
     clientJson.shopPhone = shopPhone;
     $.ajax({
@@ -26,7 +28,7 @@ $(document).ready(function () {
         },
         error: function () {
             alert("登陆失败请重新登陆！");
-            setTimeout(location.href="ShopLogin.jsp",2000);
+            location.href="ShopLogin.jsp";
         }
     });
 });

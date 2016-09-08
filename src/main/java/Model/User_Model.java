@@ -42,9 +42,9 @@ public class User_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
 
         return output;
