@@ -62,10 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				success: function (sJson) {
 					var data = sJson.serverJson;
-                    $("#foodName").html(data.foodName);
-                    $("#shopName").html(data.shopName);
-                    $("#shopPhone").html(data.shopId);
-                    $("#foodDetail").html(data.foodDetail);
+		                    	$("#foodName").html(data.foodName);
+		                    	$("#shopName").html(data.shopName);
+		                    	$("#shopPhone").html(data.shopId);
+		                    	$("#foodDetail").html(data.foodDetail);
 				}
 			});
 		});
