@@ -1,6 +1,6 @@
 package control;
 
-import Model.Shop_Model;
+import dao.Shop_Model;
 import net.sf.json.JSONObject;
 
 /**
@@ -13,8 +13,8 @@ public class Shop {
     public Shop(){
     }
 
-    /**
-     * method: shopLogin
+    /**商家登陆
+     * method: shopLogin()
      * @param cJson 客户端发送的数据
      * @return sJson 服务端响应的数据
      */
@@ -37,8 +37,10 @@ public class Shop {
         return sJson;
     }
 
-    /**
-     * method: shopCenter
+    /**商家中心
+     * method: shopCenter()
+     * @param cJson
+     * @return
      */
     public JSONObject shopCenter(JSONObject cJson){
         JSONObject sJson;
@@ -50,8 +52,10 @@ public class Shop {
         return sJson;
     }
 
-    /**
-     * method: shopRegister
+    /**商家注册
+     * method: shopRegister()
+     * @param cJson
+     * @return
      */
     public JSONObject shopRegister(JSONObject cJson){
         JSONObject sJson = new JSONObject();
@@ -73,8 +77,10 @@ public class Shop {
         return sJson;
     }
 
-    /**
-     * method: shopList
+    /**商家列表
+     * method: shopList()
+     * @param cJson
+     * @return
      */
     public JSONObject shopList(JSONObject cJson){
 

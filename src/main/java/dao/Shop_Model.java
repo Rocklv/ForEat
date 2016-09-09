@@ -1,4 +1,4 @@
-package Model;
+package dao;
 
 import core.DBUtil;
 import net.sf.json.JSONArray;
@@ -43,11 +43,10 @@ public class Shop_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
-
         return output;
     }
 
@@ -74,15 +73,13 @@ public class Shop_Model {
                 sJson.element("shopName", rs.getString("name"));
                 sJson.element("shopDetail", rs.getString("detail"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
-
         return sJson;
     }
 
@@ -110,8 +107,8 @@ public class Shop_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(conn);
             DBUtil.close(pst);
+            DBUtil.close(conn);
         }
         return rs;
     }
@@ -145,9 +142,9 @@ public class Shop_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
         return sJson;
     }

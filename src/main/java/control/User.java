@@ -1,6 +1,6 @@
 package control;
 
-import Model.User_Model;
+import dao.User_Model;
 import net.sf.json.JSONObject;
 
 /**
@@ -14,8 +14,8 @@ public class User {
 	public User() {
 	}
 
-	/**
-	 * method: UserLogin
+	/**用户登录
+	 * method: UserLogin()
 	 * @param cJson 客户端发送的数据
 	 * @return sJson 服务端响应的数据
      */
@@ -38,9 +38,11 @@ public class User {
 		return sJson;
 	}
 
-	/**
+	/**用户中心
 	 * method: userCenter
-	 */
+	 * @param cJson
+	 * @return
+     */
 	public JSONObject userCenter(JSONObject cJson){
 		JSONObject sJson;
 
@@ -54,9 +56,11 @@ public class User {
 		return sJson;
 	}
 
-	/**
-	 * method: userRegister
-	 */
+	/**用户注册
+	 * method: userRegister()
+	 * @param cJson
+	 * @return
+     */
 	public JSONObject userRegister(JSONObject cJson){
 		JSONObject sJson = new JSONObject();
 

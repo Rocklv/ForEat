@@ -1,11 +1,9 @@
-package Model;
+package dao;
 
 import core.DBUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.groovy.JsonGroovyBuilder;
 
-import java.rmi.dgc.DGC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,9 +46,9 @@ public class Food_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
 
         return sJson;

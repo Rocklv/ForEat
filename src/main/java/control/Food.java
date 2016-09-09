@@ -1,6 +1,6 @@
 package control;
 
-import Model.Food_Model;
+import dao.Food_Model;
 import net.sf.json.JSONObject;
 
 /**

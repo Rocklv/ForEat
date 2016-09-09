@@ -1,6 +1,6 @@
 package control;
 
-import Model.Order_Model;
+import dao.Order_Model;
 import net.sf.json.JSONObject;
 
 import java.text.SimpleDateFormat;

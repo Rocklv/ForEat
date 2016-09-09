@@ -1,4 +1,4 @@
-package Model;
+package dao;
 
 import core.DBUtil;
 import net.sf.json.JSONArray;
@@ -55,6 +55,12 @@ public class Order_Model {
     }
 
 
+    /**查看订单列表
+     * method: orderList()
+     * @param roleId
+     * @param sql
+     * @return
+     */
     public static JSONObject orderList(String roleId,String sql){
         //初始化json数据结构
         JSONObject sJson = new JSONObject();
@@ -181,6 +187,11 @@ public class Order_Model {
         return sJson;
     }
 
+    /**商家接单
+     * method: orderReceive()
+     * @param orderId
+     * @return
+     */
     public static JSONObject orderReceive(String orderId){
         JSONObject sJson = new JSONObject();
         String sql = "UPDATE orders SET state='1' WHERE id=?";

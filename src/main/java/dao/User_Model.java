@@ -1,4 +1,4 @@
-package Model;
+package dao;
 
 import core.DBUtil;
 import net.sf.json.JSONObject;
@@ -46,7 +46,6 @@ public class User_Model {
             DBUtil.close(pst);
             DBUtil.close(conn);
         }
-
         return output;
     }
 
@@ -76,11 +75,10 @@ public class User_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DBUtil.close(conn);
-            DBUtil.close(pst);
             DBUtil.close(rs);
+            DBUtil.close(pst);
+            DBUtil.close(conn);
         }
-
         return sJson;
     }
 
@@ -112,8 +110,8 @@ public class User_Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            DBUtil.close(conn);
             DBUtil.close(pst);
+            DBUtil.close(conn);
         }
         return rs;
     }
