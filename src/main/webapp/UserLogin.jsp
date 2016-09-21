@@ -59,7 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     location.href="UserLogin.jsp";
                 }else {
                     //登陆成功则跳转至个人信息界面
-                    alert(sJson.resultMessage);
                     location.href="UserCenter.jsp?phone="+clientJson.phone;
                 }
 			}

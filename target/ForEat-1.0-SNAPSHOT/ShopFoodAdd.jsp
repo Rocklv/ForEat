@@ -3,6 +3,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String shopPhone = (String) session.getAttribute("shopPhone");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,27 +30,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="Content">
 		<img id="centerlogo" src="img/Starbucks.jpg" alt="">
 		<div id="center-wrap">
-			<div class="information">
-				<p class="key">餐品名称 :</p>
-				<input type="text" class="foodData" />
-			</div>
-			<div class="information">
-				<p class="key">餐品价格 :</p>
-				<input type="text" class="foodData" />
-			</div>
-			<div class="information">
-				<p class="key">餐品图片 :</p>
-				<input type="file" class="foodData" />
-			</div>
-			<div class="information">
-				<p class="key">餐品详情 :</p>
-				<textarea></textarea>
-			</div>
+            <form action="foodLogoUpload" method="post" enctype="multipart/form-data">
+                <div class="information">
+                    <p class="key">餐品名称 :</p>
+                    <input id="foodName" name="foodName" type="text" class="foodData" />
+                </div>
+                <div class="information">
+                    <p class="key">餐品价格 :</p>
+                    <input id="foodPrice" name="foodPrice" type="text" class="foodData" />
+                </div>
+                <div class="information">
+                    <p class="key">餐品详情 :</p>
+                    <textarea id="foodDetail" name="foodDetail"></textarea>
+                </div>
+				<div class="information">
+					<p class="key">餐品图片 :</p>
+					<input id="foodLogo" name="foodLogo" type="file" class="foodData" />
+					<input type="submit" value="上传" />
+				</div>
+			</form>
 			<button id="foodAdd">确定添加</button>
 		</div>
 	</div>
-	
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 	<script type="text/javascript">
+        var baseUrl = '<%=basePath%>';
+        var shopPhone = '<%=shopPhone%>';
+        var clientJson = new Object();
+        clientJson.foodLogo = $('#foodLogo');
 	</script>
+    <script type="text/javascript" src="js/ShopFoodAdd.js"></script>
 </body>
 </html>
