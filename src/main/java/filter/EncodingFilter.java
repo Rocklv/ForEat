@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * CharacterFilter
+ * EncodingFilter
  */
-public class CharacterFilter implements Filter {
+public class EncodingFilter implements Filter {
     private String encoding;
 
     public void init(FilterConfig filterConfig) throws ServletException {
