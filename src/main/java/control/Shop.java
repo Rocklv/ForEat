@@ -73,7 +73,6 @@ public class Shop {
             sJson.element(resultCode,1);
             sJson.element(resultMessage,"商家注册失败！");
         }
-
         return sJson;
     }
 

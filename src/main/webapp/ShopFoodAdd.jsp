@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String shopPhone = (String) session.getAttribute("shopPhone");
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String shopPhone = (String) session.getAttribute("shopPhone");
+    String imgLogo="img/food.jpg";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,25 +31,26 @@ String shopPhone = (String) session.getAttribute("shopPhone");
 	<div id="Content">
 		<img id="centerlogo" src="img/Starbucks.jpg" alt="">
 		<div id="center-wrap">
-            <form action="foodLogoUpload" method="post" enctype="multipart/form-data">
+            <form id="foodLogoUpload" action="foodLogoUpload" method="post" enctype="multipart/form-data">
                 <div class="information">
-                    <p class="key">餐品名称 :</p>
-                    <input id="foodName" name="foodName" type="text" class="foodData" />
+                    <p class="key">餐品图片 :</p>
+                    <input id="submit" type="submit" value="上传" />
+                    <input id="foodLogo" name="foodLogo" type="file" class="foodData" />
+                    <img id="imgLogo" src="<%=imgLogo%>" alt="foodLogo" />
                 </div>
-                <div class="information">
-                    <p class="key">餐品价格 :</p>
-                    <input id="foodPrice" name="foodPrice" type="text" class="foodData" />
-                </div>
-                <div class="information">
-                    <p class="key">餐品详情 :</p>
-                    <textarea id="foodDetail" name="foodDetail"></textarea>
-                </div>
-				<div class="information">
-					<p class="key">餐品图片 :</p>
-					<input id="foodLogo" name="foodLogo" type="file" class="foodData" />
-					<input type="submit" value="上传" />
-				</div>
-			</form>
+            </form>
+			<div class="information">
+				<p class="key">餐品名称 :</p>
+				<input id="foodName" name="foodName" type="text" class="foodData" />
+			</div>
+			<div class="information">
+				<p class="key">餐品价格 :</p>
+				<input id="foodPrice" name="foodPrice" type="text" class="foodData" />
+			</div>
+			<div class="information">
+				<p class="key">餐品详情 :</p>
+				<textarea id="foodDetail" name="foodDetail"></textarea>
+			</div>
 			<button id="foodAdd">确定添加</button>
 		</div>
 	</div>
@@ -56,8 +58,6 @@ String shopPhone = (String) session.getAttribute("shopPhone");
 	<script type="text/javascript">
         var baseUrl = '<%=basePath%>';
         var shopPhone = '<%=shopPhone%>';
-        var clientJson = new Object();
-        clientJson.foodLogo = $('#foodLogo');
 	</script>
     <script type="text/javascript" src="js/ShopFoodAdd.js"></script>
 </body>
