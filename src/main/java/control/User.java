@@ -1,6 +1,6 @@
 package control;
 
-import dao.User_Model;
+import dao.UserDao;
 import net.sf.json.JSONObject;
 
 /**
@@ -26,7 +26,7 @@ public class User {
 		String password = cJson.getString("password");
 
 		//用户登录验证
-		boolean userIsLogin = User_Model.isLogin(phone,password);
+		boolean userIsLogin = UserDao.isLogin(phone,password);
 
 		if(userIsLogin){
 			sJson.element(resultCode, 0);
@@ -48,7 +48,7 @@ public class User {
 
 		String phone = cJson.getString("userPhone");
 
-		sJson = User_Model.userSelect(phone);
+		sJson = UserDao.userSelect(phone);
 
 		System.out.println(sJson.getString("userPhone")+
 							sJson.getString("userName")+
@@ -69,7 +69,7 @@ public class User {
 		String userName = cJson.getString("userName");
 		String userAddress = cJson.getString("userAddress");
 
-		boolean userIsReg = User_Model.userRegister(userPhone,userPassword,userName,userAddress);
+		boolean userIsReg = UserDao.userRegister(userPhone,userPassword,userName,userAddress);
 
 		if (userIsReg){
 			sJson.element(resultCode,0);

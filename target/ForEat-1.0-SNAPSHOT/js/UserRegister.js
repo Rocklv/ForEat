@@ -54,7 +54,7 @@ function AjaxPost() {
         url: baseUrl+"index.jsp?control=User&method=userRegister",
         dataType: 'json',
         data:{
-            'clientJson': JSON.stringify(clientJson)
+            'clientJson':JSON.stringify(clientJson)
         },
         success: function (serverJson) {
             if(serverJson.resultCode = 1){

@@ -1,8 +1,10 @@
-//餐品logo
+//声明
 var foodLogo;
+//餐品图片上传
 //异步提交带有文件的二进制数据
 $('#foodLogoUpload').submit(function () {
-    var formData = new FormData($("#foodLogoUpload")[0]);
+    //将jquery的对象转换为js对象
+    var formData = new FormData($('#foodLogoUpload')[0]);
     $.ajax({
         type: 'post',
         url: $('#foodLogoUpload').attr('action'),
@@ -22,11 +24,34 @@ $('#foodLogoUpload').submit(function () {
         success: function (sJson) {
             foodLogo = sJson.filePath;
             $('#imgLogo').attr("src",foodLogo);
-
             // 存在跨域问题
             // $('#foodLogo').val(sJson.filePath);
         }
     });
     //避免默认结果返回
     return false;
+});
+
+// 添加新餐品
+$('#foodAdd').click(function () {
+    //初始化数据
+    var clientJson = new Object();
+    clientJson.shopId = shopPhone;
+    clientJson.foodName = $('#foodName').val();
+    clientJson.foodDetail = $('#foodDetail').val();
+    clientJson.foodPrice = $('#foodPrice').val();
+    clientJson.foodPic = $('#imgLogo').attr("src");
+
+    $.ajax({
+        type: 'post',
+        url: baseUrl+"index.jsp?control=Food&method=foodAdd",
+        dataType: 'json',
+        data: {
+            'clientJson':JSON.stringify(clientJson)
+        },
+        success: function (serverJson) {
+            alert(serverJson.message);
+        }
+    });
+
 });

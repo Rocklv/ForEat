@@ -27,10 +27,10 @@ submit.onclick = function() {
     }
     //count值为0时，发送注册请求
     if (count == 0) {
-        AjaxPost();
+        ajaxPost();
     }
 }
-function AjaxPost() {
+function ajaxPost() {
 
     var clientJson = new Object();
     clientJson.shopPhone = document.getElementById('shopPhone').value;

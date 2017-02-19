@@ -27,16 +27,16 @@ submit.onclick = function() {
     }
     //count值为0时，发送注册请求
     if (count == 0) {
-        AjaxPost();
+        ajaxPost();
     }
 }
-function AjaxPost() {
+function ajaxPost() {
 
     var clientJson = new Object();
     clientJson.shopPhone = document.getElementById('shopPhone').value;
     clientJson.shopName = document.getElementById('shopName').value;
     clientJson.shopPassword = document.getElementById('shopPassword').value;
-    
+
     $.ajax({
         type: "post",
         url: baseUrl+"index.jsp?control=Shop&method=shopRegister",

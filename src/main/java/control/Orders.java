@@ -1,6 +1,6 @@
 package control;
 
-import dao.Order_Model;
+import dao.OrderDao;
 import net.sf.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -28,7 +28,7 @@ public class Orders {
         //订单生成时间
         String createTime = new SimpleDateFormat("yy年MM月dd日-HH:mm:ss").format(new Date());
 
-        return Order_Model.orderAdd(id,userId,shopId,foodId,createTime);
+        return OrderDao.orderAdd(id,userId,shopId,foodId,createTime);
     }
 
     /**用户查看订单列表
@@ -44,7 +44,7 @@ public class Orders {
                         "FROM orders,food " +
                         "WHERE orders.food_id=food.id " +
                         "and user_id=?";
-        return Order_Model.orderList(userId,sql);
+        return OrderDao.orderList(userId,sql);
     }
 
     /**商家查看订单列表
@@ -61,7 +61,7 @@ public class Orders {
                     "WHERE orders.food_id=food.id " +
                     "and orders.state in('0','1') " +
                     "and orders.shop_id=?";
-        return Order_Model.orderList(shopId,sql);
+        return OrderDao.orderList(shopId,sql);
     }
 
     /**订单详情
@@ -72,7 +72,7 @@ public class Orders {
     public JSONObject orderDetail(JSONObject cJson){
 
         String orderId = (String) cJson.get("orderId");
-        return Order_Model.orderDetail(orderId);
+        return OrderDao.orderDetail(orderId);
     }
 
     /**商家接单
@@ -83,7 +83,7 @@ public class Orders {
     public JSONObject orderReceive(JSONObject cJson){
 
         String orderId = (String) cJson.get("orderId");
-        return Order_Model.orderReceive(orderId);
+        return OrderDao.orderReceive(orderId);
     }
 
     /**确认收货
@@ -94,7 +94,7 @@ public class Orders {
     public JSONObject orderConfirm(JSONObject cJson){
 
         String orderId = (String) cJson.get("orderId");
-        return  Order_Model.orderConfirm(orderId);
+        return  OrderDao.orderConfirm(orderId);
     }
 
     /**订单删除
@@ -105,6 +105,6 @@ public class Orders {
     public JSONObject orderDelete(JSONObject cJson){
 
         String orderId = (String) cJson.get("orderId");
-        return Order_Model.orderDelete(orderId);
+        return OrderDao.orderDelete(orderId);
     }
 }

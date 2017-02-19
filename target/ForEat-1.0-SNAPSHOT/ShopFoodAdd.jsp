@@ -31,6 +31,15 @@
 	<div id="Content">
 		<img id="centerlogo" src="img/Starbucks.jpg" alt="">
 		<div id="center-wrap">
+
+			<div class="information">
+				<p class="key">餐品名称 :</p>
+				<input id="foodName" name="foodName" type="text" class="foodData" />
+			</div>
+			<div class="information">
+				<p class="key">餐品价格 :</p>
+				<input id="foodPrice" name="foodPrice" type="text" class="foodData" />
+			</div>
             <form id="foodLogoUpload" action="foodLogoUpload" method="post" enctype="multipart/form-data">
                 <div class="information">
                     <p class="key">餐品图片 :</p>
@@ -40,17 +49,10 @@
                 </div>
             </form>
 			<div class="information">
-				<p class="key">餐品名称 :</p>
-				<input id="foodName" name="foodName" type="text" class="foodData" />
-			</div>
-			<div class="information">
-				<p class="key">餐品价格 :</p>
-				<input id="foodPrice" name="foodPrice" type="text" class="foodData" />
-			</div>
-			<div class="information">
 				<p class="key">餐品详情 :</p>
 				<textarea id="foodDetail" name="foodDetail"></textarea>
 			</div>
+
 			<button id="foodAdd">确定添加</button>
 		</div>
 	</div>

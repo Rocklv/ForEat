@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**数据处理：订单
- * model: Order_Model
+ * model: OrderDao
  */
-public class Order_Model {
+public class OrderDao {
 
     /**用户下单
      * method：orderAdd
@@ -53,7 +53,6 @@ public class Order_Model {
         }
         return sJson;
     }
-
 
     /**查看订单列表
      * method: orderList()

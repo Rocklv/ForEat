@@ -10,11 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * model: Shop_Model
+ * model: ShopDao
  */
-public class Shop_Model {
+public class ShopDao {
 
-    public Shop_Model() {
+    public ShopDao() {
         System.out.println("shop_Model");
     }
 

@@ -9,12 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * model: User_Model
+ * model: UserDao
  */
-public class User_Model {
+public class UserDao {
 
-    public User_Model(){
-        System.out.println("User_Model");
+    public UserDao(){
+        System.out.println("UserDao");
     }
 
     /**用户登录

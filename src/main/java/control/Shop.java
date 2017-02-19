@@ -1,6 +1,6 @@
 package control;
 
-import dao.Shop_Model;
+import dao.ShopDao;
 import net.sf.json.JSONObject;
 
 /**
@@ -25,7 +25,7 @@ public class Shop {
         String password = cJson.getString("password");
 
         //商家登录验证
-        boolean shopIsLogin = Shop_Model.isLogin(phone,password);
+        boolean shopIsLogin = ShopDao.isLogin(phone,password);
 
         if(shopIsLogin){
             sJson.element(resultCode, 0);
@@ -47,7 +47,7 @@ public class Shop {
 
         String phone = cJson.getString("shopPhone");
 
-        sJson = Shop_Model.shopSelect(phone);
+        sJson = ShopDao.shopSelect(phone);
 
         return sJson;
     }
@@ -64,7 +64,7 @@ public class Shop {
         String shopName = cJson.getString("shopName");
         String shopPassword = cJson.getString("shopPassword");
 
-        boolean shopIsReg = Shop_Model.shopRegister(shopPhone,shopPassword,shopName);
+        boolean shopIsReg = ShopDao.shopRegister(shopPhone,shopPassword,shopName);
 
         if (shopIsReg){
             sJson.element(resultCode,0);
@@ -83,12 +83,12 @@ public class Shop {
      */
     public JSONObject shopList(JSONObject cJson){
 
-        return Shop_Model.shopList();
+        return ShopDao.shopList();
     }
 
     public JSONObject findNameLogoById(JSONObject cJson){
 
         String shopId = cJson.getString("shopPhone");
-        return Shop_Model.findNameLogoById(shopId);
+        return ShopDao.findNameLogoById(shopId);
     }
 }

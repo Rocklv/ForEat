@@ -3,27 +3,30 @@ package dao;
 import core.DBUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.processors.JsonBeanProcessor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
- * model: Food_Model
+ * model: FoodDao
  */
-public class Food_Model {
+public class FoodDao {
 
     /**用户查询食品列表
      * method: userFoodList()
      * @param shopPhone
      * @return
      */
-    public static JSONObject foodList(String shopPhone){
+    public static JSONObject foodList(String shopPhone,String sql){
         JSONObject sJson = new JSONObject();
         JSONArray arrJson = new JSONArray();
         JSONObject dataJson = new JSONObject();
-        String sql = "select * from food,shop where food.shop_id=shop.id and shop.id=?";
+
         Connection conn = DBUtil.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -59,11 +62,9 @@ public class Food_Model {
      * @param foodId
      * @return
      */
-    public static JSONObject foodDetail(String foodId){
+    public static JSONObject foodDetail(String foodId,String sql){
         JSONObject sJson = new JSONObject();
         JSONObject dataJson = new JSONObject();
-        String sql = "select shop_id,food.name,food.detail,shop.name from food,shop " +
-                     "where shop.id=(select shop_id from food where food.id=?) and food.id=?";
 
         Connection conn = DBUtil.getConnection();
         PreparedStatement pst = null;
@@ -97,9 +98,8 @@ public class Food_Model {
      * @param foodId
      * @return
      */
-    public static JSONObject foodDelete(String foodId){
+    public static JSONObject foodDelete(String foodId,String sql){
         JSONObject sJson = new JSONObject();
-        String sql = "delete from food where id=?";
         Connection con = DBUtil.getConnection();
         PreparedStatement pst = null;
         int res;
@@ -109,13 +109,42 @@ public class Food_Model {
             pst.setString(1,foodId);
             res = pst.executeUpdate();
             if (res != 1)
-                sJson.element("message","删除成功！");
-            else
                 sJson.element("message","删除失败，请重新操作！");
+            else
+                sJson.element("message","删除成功！");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             DBUtil.close(pst);
+            DBUtil.close(con);
+        }
+        return sJson;
+    }
+
+    public static JSONObject foodAdd(JSONObject cJson,String sql){
+        JSONObject sJson = new JSONObject();
+        Connection con = DBUtil.getConnection();
+        PreparedStatement ps = null;
+        int res;
+
+        try {
+            ps = con.prepareStatement(sql);
+            //填充数据
+            ps.setString(1,cJson.getString("foodId"));
+            ps.setString(2,cJson.getString("shopId"));
+            ps.setString(3,cJson.getString("foodName"));
+            ps.setString(4,cJson.getString("foodDetail"));
+            ps.setString(5,cJson.getString("foodPrice"));
+            ps.setString(6,cJson.getString("foodPic"));
+            res = ps.executeUpdate();
+            if (res != 1)
+                sJson.element("message","添加失败！");
+            else
+                sJson.element("message","添加成功！");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(ps);
             DBUtil.close(con);
         }
         return sJson;
