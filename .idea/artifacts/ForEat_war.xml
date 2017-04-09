@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ForEat:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="ForEat-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="ForEat:war exploded" />
-    </root>
-  </artifact>
-</component>
