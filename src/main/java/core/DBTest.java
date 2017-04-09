@@ -21,7 +21,7 @@ public class DBTest {
 		ResultSet rs = null;
 
 		try {
-			pstmt = conn.prepareStatement(sql);
+		    pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
