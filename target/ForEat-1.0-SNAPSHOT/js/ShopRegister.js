@@ -36,7 +36,7 @@ function ajaxPost() {
     clientJson.shopPhone = document.getElementById('shopPhone').value;
     clientJson.shopName = document.getElementById('shopName').value;
     clientJson.shopPassword = document.getElementById('shopPassword').value;
-    
+
     $.ajax({
         type: "post",
         url: baseUrl+"index.jsp?control=Shop&method=shopRegister",
