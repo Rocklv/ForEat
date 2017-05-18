@@ -15,6 +15,11 @@ $(function () {
             $("#shopPhone").html(sJson.shopPhone);
             $("#userPhone").html(sJson.userPhone);
             $("#foodDetail").html(sJson.foodDetail);
+            if (sJson.foodLogo!==undefined && sJson.foodLogo!==""){
+                $("#food-logo").attr("src",sJson.foodLogo);
+            }else {
+                $("#food-logo").attr("src","img/food.jpg");
+            }
         }
     });
 });

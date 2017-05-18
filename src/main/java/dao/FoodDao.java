@@ -80,6 +80,7 @@ public class FoodDao {
                 dataJson.element("foodName",rs.getString("food.name"));
                 dataJson.element("foodDetail",rs.getString("food.detail"));
                 dataJson.element("shopName",rs.getString("shop.name"));
+                dataJson.element("foodLogo",rs.getString("food.pic"));
             }
             sJson.element("serverJson",dataJson);
         } catch (SQLException e) {

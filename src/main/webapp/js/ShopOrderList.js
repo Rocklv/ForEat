@@ -8,16 +8,22 @@ $(function () {
         },
         success: function (sJson) {
             var data = sJson.serverJson;
+            var foodLogo = "";
             for (var i=0; i<data.length; i++){
+                if (data[i].foodLogo!==undefined && data[i].foodLogo!=="") {
+                    foodLogo = data[i].foodLogo;
+                }else {
+                    foodLogo = "img/food.jpg";
+                }
                 var list = "<div class='list'>"+
-                                "<img src='img/Starbucks.jpg' alt='商家logo' />"+
+                                "<img src='"+foodLogo+"' alt='商家logo' />"+
                                 "<div class='list-wrap'>"+
                                     "<div class='list-part' onclick='orderDetail(\""+data[i].orderId+"\")'>"+
                                         "<p class='name'>"+data[i].foodName+"</p>"+
                                         "<p class='time'>"+data[i].createTime+"</p>"+
                                     "</div>"+
                                     "<div class='list-part'>"+
-                                        "<p class='orderId'>"+data[i].orderId+"</p>"+
+                                        "<p class='orderId'>"+data[i].userAddress+"</p>"+
                                         getOrderState(data[i])+
                                     "</div>"+
                                 "</div>"+

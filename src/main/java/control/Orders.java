@@ -40,9 +40,10 @@ public class Orders {
 
         String userId = (String) cJson.get("userPhone");
         //sql算法
-        String sql = "SELECT orders.id, food.name, createTime, state " +
-                        "FROM orders,food " +
+        String sql = "SELECT orders.id, food.name, createTime, state, user.address, food.pic " +
+                        "FROM orders,food,user " +
                         "WHERE orders.food_id=food.id " +
+                        "and orders.user_id=user.id " +
                         "and user_id=?";
         return OrderDao.orderList(userId,sql);
     }
@@ -56,9 +57,10 @@ public class Orders {
 
         String shopId = (String) cJson.get("shopPhone");
         //sql算法
-        String sql = "SELECT orders.id, food.name, createTime, state " +
-                    "FROM orders,food " +
+        String sql = "SELECT orders.id, food.name, createTime, state, user.address, food.pic " +
+                    "FROM orders,food,user " +
                     "WHERE orders.food_id=food.id " +
+                    "and orders.user_id=user.id " +
                     "and orders.state in('0','1') " +
                     "and orders.shop_id=?";
         return OrderDao.orderList(shopId,sql);

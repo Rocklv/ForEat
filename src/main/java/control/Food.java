@@ -30,7 +30,7 @@ public class Food {
     public JSONObject foodDetail(JSONObject cJson){
 
         String foodId = cJson.getString("foodId");
-        String sql = "select shop_id,food.name,food.detail,shop.name from food,shop " +
+        String sql = "select shop_id,food.name,food.detail,shop.name,food.pic from food,shop " +
                 "where shop.id=(select shop_id from food where food.id=?) and food.id=?";
         return FoodDao.foodDetail(foodId,sql);
     }

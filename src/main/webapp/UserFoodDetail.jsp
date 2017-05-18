@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="UserCenter.jsp"><i class="icon-user"></i></a>
 	</div>
 	<div id="Content">
-		<img id="centerlogo" src="img/food.jpg" alt="">
+		<img id="food-logo" alt="商品logo">
 		<div id="center-wrap">
 			<div class="information">
 				<p class="itom">餐品名称：</p>
@@ -62,10 +62,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				success: function (sJson) {
 					var data = sJson.serverJson;
-		                    	$("#foodName").html(data.foodName);
-		                    	$("#shopName").html(data.shopName);
-		                    	$("#shopPhone").html(data.shopId);
-		                    	$("#foodDetail").html(data.foodDetail);
+					$("#foodName").html(data.foodName);
+					$("#shopName").html(data.shopName);
+					$("#shopPhone").html(data.shopId);
+					$("#foodDetail").html(data.foodDetail);
+					if (data.foodLogo!==undefined && data.foodLogo!=="") {
+					    $("#food-logo").attr("src",data.foodLogo);
+                    }else {
+					    $("#food-logo").attr("src","img/food.jpg");
+                    }
 				}
 			});
 		});

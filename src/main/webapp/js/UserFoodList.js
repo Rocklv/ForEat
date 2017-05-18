@@ -10,10 +10,16 @@ $(document).ready(function () {
 
             var data = sJson.serverJson;
             document.getElementById("shopName").innerHTML= data[0].shopName;
+            var foodLogo="";
 
             for (var i=0; i< data.length; i++){
+                if (data[i].foodLogo !== undefined && data[i].foodLogo !== "") {
+                    foodLogo = data[i].foodLogo;
+                }else {
+                    foodLogo = 'img/food.jpg';
+                }
                 var list = "<div class='list'>"+
-                            "<img src='img/food.jpg' alt='商家logo' />"+
+                            "<img src='"+foodLogo+"' alt='商家logo' />"+
                                 "<div class='list-wrap'>"+
                                     "<div class='list-part' onclick='foodDetail(\""+data[i].foodId+"\")'>"+
                                         "<p class='name'>"+data[i].foodName+"</p>"+

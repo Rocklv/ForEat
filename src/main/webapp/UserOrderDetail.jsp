@@ -24,7 +24,7 @@ String orderId = request.getParameter("orderId");
 		<a href="UserCenter.jsp"><i class="icon-user"></i></a>
 	</div>
 	<div id="Content">
-		<img id="centerlogo" src="img/food.jpg" alt="">
+		<img id="food-logo" alt="商品logo">
 		<div id="center-wrap">
 			<div class="information">
 				<p class="itom">订单状态：</p>

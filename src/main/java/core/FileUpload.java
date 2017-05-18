@@ -166,7 +166,7 @@ public class FileUpload {
         //路径处理
         url = url.replace(File.separator,"/");
         String path = req.getContextPath();
-        String basePath = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+path+"/";
-        return basePath+url+"/"+filename;
+//        String basePath = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+path+"/";
+        return url+"/"+filename;
     }
 }

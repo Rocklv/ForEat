@@ -79,6 +79,8 @@ public class OrderDao {
                 dataJson.element("foodName",res.getString("name"));
                 dataJson.element("createTime",res.getString("createTime"));
                 dataJson.element("state",res.getString("state"));
+                dataJson.element("userAddress",res.getString("user.address"));
+                dataJson.element("foodLogo",res.getString("food.pic"));
                 arrJson.add(dataJson);
             }
             sJson.element("serverJson",arrJson);
@@ -98,7 +100,7 @@ public class OrderDao {
      */
     public static JSONObject orderDetail(String orderId){
         JSONObject sJson = new JSONObject();
-        String sql = "SELECT orders.state,orders.id,orders.createTime,food.name,orders.shop_id,orders.user_id,food.detail " +
+        String sql = "SELECT orders.state,orders.id,orders.createTime,food.name,orders.shop_id,orders.user_id,food.detail,food.pic " +
                         "FROM orders,food WHERE orders.food_id=food.id and orders.id=?";
         Connection con = DBUtil.getConnection();
         PreparedStatement pst = null;
@@ -117,6 +119,7 @@ public class OrderDao {
                 sJson.element("shopPhone",res.getString("orders.shop_id"));
                 sJson.element("userPhone",res.getString("orders.user_id"));
                 sJson.element("foodDetail",res.getString("food.detail"));
+                sJson.element("foodLogo",res.getString("food.pic"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

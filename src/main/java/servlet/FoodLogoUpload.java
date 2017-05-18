@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FoodLogoUpload extends HttpServlet {
 
@@ -32,7 +34,7 @@ public class FoodLogoUpload extends HttpServlet {
         //设置给定路径，eg:file/id -> file下的id文件夹
         String url = "file" + File.separator + id;
         //设置文件名
-        String filename = "foodLogo";
+        String filename = "foodLogo"+ new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String filePath = fileUpload.uploadFile(req,id,url,filename);
         //将文件路径封装成json格式
         JSONObject serverJson = new JSONObject();

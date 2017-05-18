@@ -9,7 +9,7 @@
 
 .list {
 	width: 90%;
-	height: 100px;
+	height: 95px;
 	margin: 0 auto;
 	border-bottom: 1px solid #ddd;
 	background: #fff;
@@ -38,7 +38,7 @@
 
 .list-part {
 	width: 100%;
-	height: 50%;
+	height: 70%;
 }
 
 .list-part:first-of-type{
@@ -67,11 +67,15 @@
 
 .orderId {
 	width: 60%;
-	height: 45px;
+	height: 50px;
 	margin: 0 0 0 10px;
 	font-size: 0.8em;
 	float: left;
     overflow: hidden;
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .time {

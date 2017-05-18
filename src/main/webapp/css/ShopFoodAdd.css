@@ -39,11 +39,15 @@
 
 #imgLogo{
     display: block;
-    width:95%;
-    height:70px;
-    margin:0px auto;
+    width: 75%;
+    height: 75px;
+    margin: 0px auto;
 }
 
-form>.information{
+.upload-logo{
     height: 120px;
+}
+
+.upload-logo>.key{
+    height: 35px;
 }

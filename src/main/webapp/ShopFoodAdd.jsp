@@ -41,7 +41,7 @@
 				<input id="foodPrice" name="foodPrice" type="text" class="foodData" />
 			</div>
             <form id="foodLogoUpload" action="foodLogoUpload" method="post" enctype="multipart/form-data">
-                <div class="information">
+                <div class="information upload-logo">
                     <p class="key">餐品图片 :</p>
                     <input id="submit" type="submit" value="上传" />
                     <input id="foodLogo" name="foodLogo" type="file" class="foodData" />
